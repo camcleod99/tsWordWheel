@@ -1,0 +1,22 @@
+{
+  "name": "camwordwheel",
+  "version": "0.0.0",
+  "description": "A Programme that creates word wheel puzzles",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --testPathPatern=src/Test"
+  },
+  "author": "Craig A. McLeod",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.11",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  }
+}
