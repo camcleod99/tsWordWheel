@@ -34,16 +34,14 @@ Whilst the API is the best method, it might not be the most practical, so at thi
 be used.
 
 #### Tests
-1. **TODO** - lorem
-2. **TODO** - ipsum
-3. **TODO** - dolor
-4. **TODO** - sit
+1. **TODO** - Directories are loaded
+2. **TODO** - Wordlist is checked against directories
+3. **TODO** - Legal words are returned
  
 #### Notes
-
 - lopsom
 
-### 0.0.1 - WW1 Functional - Compete
+### 0.0.1 - WW1 Functional - DONE
 #### Description
 The Maker service Creates a nine-letter word and notes the forth letter as the "target" letter. The word it creates is 
 not legal (Has a point value in Scrabble).
