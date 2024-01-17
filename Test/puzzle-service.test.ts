@@ -1,10 +1,15 @@
 import * as puzzleServices from '../src/puzzle/service';
 let words: string[] | null;
+let dictionary: string[] | null;
 let pickedWord: string;
 let wordAnagrams: string[];
 
 beforeAll(async () => {
   words = await puzzleServices.maker('words');
+  if (words === null) {
+    throw new Error("words is null so that's not loading, something went wrong.");
+  }
+  dictionary = await puzzleServices.maker('words_alpha');
   if (words === null) {
     throw new Error("words is null so that's not loading, something went wrong.");
   }

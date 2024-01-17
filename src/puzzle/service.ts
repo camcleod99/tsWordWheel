@@ -1,3 +1,6 @@
+// Load the readline module from Node.js
+import * as rl from 'readline';
+import * as fs from 'readline';
 async function loadWords(fileName: String) : Promise<string[] | null>{
   try {
     const wordData = await import(`../../data/${fileName}.json`)
@@ -8,6 +11,25 @@ async function loadWords(fileName: String) : Promise<string[] | null>{
     return null;
   }
 }
+
+async function loadDictionary(fileName: String) : Promise<string[] | null>{
+  let correctWords : string[] = [];
+  let puzzleWords : string[] = [];
+  try {
+    const wordData = await import(`../../data/${fileName}.txt`)
+    // Read through the file line by line, which has a single word.
+    // If the word is exactly 9 letters long, add it to correctWords
+    // If the word is between 4 and 9 letters long, add it to correctWords
+    return wordData.words;
+  }
+  catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+const dictionary : Promise<string[] | null> = loadDictionary('words_alpha');
+
 export function maker(fileName: string) : Promise<string[] | null> {
   return loadWords(fileName);
 }
