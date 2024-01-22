@@ -3,58 +3,72 @@ import * as fs from 'fs';
 import * as util from 'util';
 const readDir = util.promisify(fs.readdir);
 
-async function getFiles(dirPath: string, fileType: string): Promise<string[]>{
+ export async function getFiles(dirPath: string, fileType: string): Promise<string[]>{
   let listing : string[] = [];
   try{
     listing = await readDir(dirPath);
   } catch (error) {
-    console.error(`Error reading directory: ${error}`);
+    console.error(`Er 11: Problem reading directory: ${error}`);
     return [];
   }
-
   return listing.filter(file => file.endsWith(`.${fileType}`));
-  // return filterByFileType(listing, fileType);
 }
 
-async function loadWords(files: String[]) : Promise<string[] | null>{
-  let dictionary : string[] = [];
-  try {
-    // Get the data from all the files in the data directory
+export async function createDictionary(files: string[] | null): Promise<string[] | null> {
+  if (files != null) {
+    let dictionary : string[] = [];
+    let wordData
     for (const file of files){
-      const wordData = await import(`../../data/${file}`)
-      dictionary.push(...wordData.words);
+      try {
+        wordData = await import(`../../data/${file}`)
+        dictionary = dictionary.concat(wordData.words);
+      } catch (error) {
+        console.error(error);
+      }
     }
-  } catch (error) {
-    console.error(error);
-    return null;
+    return dictionary;
   }
-  return dictionary;
+  return null;
 }
 
-async function loadDictionary(fileName: String) : Promise<string[] | null>{
-  let correctWords : string[] = [];
-  let puzzleWords : string[] = [];
-  try {
-    const wordData = await import(`../../data/${fileName}.txt`)
-    // Read through the file line by line, which has a single word.
-    // If the word is exactly 9 letters long, add it to correctWords
-    // If the word is between 4 and 9 letters long, add it to correctWords
-    return wordData.words;
-  }
-  catch (error) {
-    console.error(error);
+export function filterDictionary(dictionary: string[] | null, length: number) : string[] | null {
+  if (dictionary === null) {
     return null;
+  } else {
+    return dictionary?.filter(word => word.length === length);
   }
 }
 
-const dictionary : Promise<string[] | null> = loadDictionary('words_alpha');
+// async function loadDictionary(fileName: String) : Promise<string[] | null>{
+//   let correctWords : string[] = [];
+//   let puzzleWords : string[] = [];
+//   try {
+//     const wordData = await import(`../../data/${fileName}.txt`)
+//     // Read through the file line by line, which has a single word.
+//     // If the word is exactly 9 letters long, add it to correctWords
+//     // If the word is between 4 and 9 letters long, add it to correctWords
+//     return wordData.words;
+//   }
+//   catch (error) {
+//     console.error(error);
+//     return null;
+//   }
+// }
+
+// const dictionary : Promise<string[] | null> = loadDictionary('words_alpha');
 
 export function readDirectory(dirPath: string, fileType: string) : Promise<string[]>{
   return getFiles(dirPath, fileType);
 }
 
-export function createDictionary(files: string[]) : Promise<string[] | null>{
-  return loadWords(files);
+
+
+export function filterWords(directory: string[] | null, length: number) : string[] | null {
+   if (directory === null) {
+     return null;
+   } else {
+     return directory?.filter(word => word.length === length);
+   }
 }
 
 // export function maker(fileName: string) : Promise<string[] | null> {

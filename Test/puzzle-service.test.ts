@@ -1,5 +1,4 @@
 import * as puzzleServices from '../src/puzzle/service';
-import {createDictionary} from "../src/puzzle/service";
 
 // Local Variables
 let files: string[] | null;
@@ -8,23 +7,27 @@ let dictionary: string[] | null;
 let pickedWord: string | null;
 let wordAnagrams: string[] | null;
 
+// Test Variables
+const targetDirectory : string = './data/';
+const targetType : string = 'json';
+
 beforeAll(async () => {
-  files = await puzzleServices.readDirectory('./data/', 'json');
-  dictionary = await puzzleServices.createDictionary(files);
-  pickedWord = puzzleServices.picker(dictionary);
-  wordAnagrams = puzzleServices.mixer(pickedWord);
+  // files = await puzzleServices.readDirectory('./data/', 'json');
+  // pickedWord = puzzleServices.picker(dictionary);
+  // wordAnagrams = puzzleServices.mixer(pickedWord);
 })
 
-test("Returns the word list", () => {
-  expect(words).toBeDefined();
+test("Returns the file list", async () => {
+  expect (puzzleServices.getFiles(targetDirectory,targetType)).toBeDefined();
 });
 
-test("Returns a word picked at random", () => {
-  expect(pickedWord).toBeDefined();
+test("Creates the dictionary from the file list", async () => {
+  const files = await puzzleServices.getFiles(targetDirectory,targetType);
+  expect (puzzleServices.createDictionary(files)).toBeDefined();
 });
 
-test("Returns the anagrams of the picked word", () => {
-  console.log(pickedWord);
-  console.log(wordAnagrams);
-  expect(wordAnagrams).toBeDefined();
+test("Filters the directory by word length", async () => {
+  const files = await puzzleServices.getFiles(targetDirectory,targetType);
+  const dictionary = await puzzleServices.createDictionary(files);
+  expect (puzzleServices.filterWords(dictionary, 9)?.length).toEqual(53402);
 });
