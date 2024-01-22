@@ -1,19 +1,17 @@
 import * as puzzleServices from '../src/puzzle/service';
+import {createDictionary} from "../src/puzzle/service";
+
+// Local Variables
+let files: string[] | null;
 let words: string[] | null;
 let dictionary: string[] | null;
-let pickedWord: string;
-let wordAnagrams: string[];
+let pickedWord: string | null;
+let wordAnagrams: string[] | null;
 
 beforeAll(async () => {
-  words = await puzzleServices.maker('words');
-  if (words === null) {
-    throw new Error("words is null so that's not loading, something went wrong.");
-  }
-  dictionary = await puzzleServices.maker('words_alpha');
-  if (words === null) {
-    throw new Error("words is null so that's not loading, something went wrong.");
-  }
-  pickedWord = puzzleServices.picker(words);
+  files = await puzzleServices.readDirectory('./data/', 'json');
+  dictionary = await puzzleServices.createDictionary(files);
+  pickedWord = puzzleServices.picker(dictionary);
   wordAnagrams = puzzleServices.mixer(pickedWord);
 })
 

@@ -1,15 +1,34 @@
 // Load the readline module from Node.js
-import * as rl from 'readline';
-import * as fs from 'readline';
-async function loadWords(fileName: String) : Promise<string[] | null>{
-  try {
-    const wordData = await import(`../../data/${fileName}.json`)
-    return wordData.words;
+import * as fs from 'fs';
+import * as util from 'util';
+const readDir = util.promisify(fs.readdir);
+
+async function getFiles(dirPath: string, fileType: string): Promise<string[]>{
+  let listing : string[] = [];
+  try{
+    listing = await readDir(dirPath);
+  } catch (error) {
+    console.error(`Error reading directory: ${error}`);
+    return [];
   }
-  catch (error) {
+
+  return listing.filter(file => file.endsWith(`.${fileType}`));
+  // return filterByFileType(listing, fileType);
+}
+
+async function loadWords(files: String[]) : Promise<string[] | null>{
+  let dictionary : string[] = [];
+  try {
+    // Get the data from all the files in the data directory
+    for (const file of files){
+      const wordData = await import(`../../data/${file}`)
+      dictionary.push(...wordData.words);
+    }
+  } catch (error) {
     console.error(error);
     return null;
   }
+  return dictionary;
 }
 
 async function loadDictionary(fileName: String) : Promise<string[] | null>{
@@ -30,12 +49,25 @@ async function loadDictionary(fileName: String) : Promise<string[] | null>{
 
 const dictionary : Promise<string[] | null> = loadDictionary('words_alpha');
 
-export function maker(fileName: string) : Promise<string[] | null> {
-  return loadWords(fileName);
+export function readDirectory(dirPath: string, fileType: string) : Promise<string[]>{
+  return getFiles(dirPath, fileType);
 }
 
-export function picker(words: string[]) : string {
-  return words[Math.floor(Math.random() * words.length)];
+export function createDictionary(files: string[]) : Promise<string[] | null>{
+  return loadWords(files);
+}
+
+// export function maker(fileName: string) : Promise<string[] | null> {
+//   return loadWords(fileName);
+// }
+
+export function picker(words: string[] | null) : string | null {
+  if (words != null){
+    return words[Math.floor(Math.random() * words.length)];
+  }
+  else {
+    return null;
+  }
 }
 
 // Uses the recursive function from maker/services.ts to make the whole list of anagrams.
@@ -44,7 +76,12 @@ export function picker(words: string[]) : string {
 
 // We're using the word and mix count to see how many times the recursive function is called and
 // how many words are returned.
-export function mixer(word: string) : string[] {
+export function mixer(word: string | null) : string[] | null {
+  // Catch word being null, call the whole thing off and return null.
+  if (word === null){
+    return null;
+  }
+
   let result : string[] = [];
   const targetLetter : string = word[4];
 
