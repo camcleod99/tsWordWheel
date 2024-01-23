@@ -32,36 +32,15 @@ export async function createDictionary(files: string[] | null): Promise<string[]
 }
 
 export function filterDictionary(dictionary: string[] | null, length: number) : string[] | null {
-  if (dictionary === null) {
-    return null;
-  } else {
+  if (dictionary != null) {
     return dictionary?.filter(word => word.length === length);
   }
+  return null;
 }
-
-// async function loadDictionary(fileName: String) : Promise<string[] | null>{
-//   let correctWords : string[] = [];
-//   let puzzleWords : string[] = [];
-//   try {
-//     const wordData = await import(`../../data/${fileName}.txt`)
-//     // Read through the file line by line, which has a single word.
-//     // If the word is exactly 9 letters long, add it to correctWords
-//     // If the word is between 4 and 9 letters long, add it to correctWords
-//     return wordData.words;
-//   }
-//   catch (error) {
-//     console.error(error);
-//     return null;
-//   }
-// }
-
-// const dictionary : Promise<string[] | null> = loadDictionary('words_alpha');
 
 export function readDirectory(dirPath: string, fileType: string) : Promise<string[]>{
   return getFiles(dirPath, fileType);
 }
-
-
 
 export function filterWords(directory: string[] | null, length: number) : string[] | null {
    if (directory === null) {
@@ -71,10 +50,6 @@ export function filterWords(directory: string[] | null, length: number) : string
    }
 }
 
-// export function maker(fileName: string) : Promise<string[] | null> {
-//   return loadWords(fileName);
-// }
-
 export function picker(words: string[] | null) : string | null {
   if (words != null){
     return words[Math.floor(Math.random() * words.length)];
@@ -82,6 +57,25 @@ export function picker(words: string[] | null) : string | null {
   else {
     return null;
   }
+}
+
+export function createPuzzle(word: string | null) : string | null {
+  let temp : string[] = [];
+  let wordArray : string[] = [];
+
+  if (word !== null) {
+    temp = word.split('');
+    let random : number = 0;
+
+    for (let i: number = 0; i < word.length; i++) {
+      random = Math.floor(Math.random() * temp.length);
+      wordArray[i] = temp[random];
+      temp.splice(random, 1);
+    }
+    return wordArray.join('');
+  }
+
+  return null
 }
 
 // Uses the recursive function from maker/services.ts to make the whole list of anagrams.
