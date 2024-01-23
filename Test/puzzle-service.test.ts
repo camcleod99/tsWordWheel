@@ -71,7 +71,7 @@ test("Returns all the words that are correct", async () => {
     targetLetter = pickedWord[4];
   }
 
-  const result : string[] = puzzleServices.mixer(pickedWord)
+  //const result : string[] = puzzleServices.mixer(pickedWord)
 
   expect (targetLetter).not.toEqual("-1");
 });

@@ -38,7 +38,7 @@ export function picker(words: string[]) : string {
 }
 
 export function createPuzzle(word: string) : string {
-  let temp : string[] = [];
+  let temp : string[] ;
   let wordArray : string[] = [];
   let random : number = 0;
   temp = word.split('');
