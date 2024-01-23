@@ -9,73 +9,47 @@ const readDir = util.promisify(fs.readdir);
     listing = await readDir(dirPath);
   } catch (error) {
     console.error(`Er 11: Problem reading directory: ${error}`);
-    return [];
+    return ["-1"];
   }
   return listing.filter(file => file.endsWith(`.${fileType}`));
 }
 
-export async function createDictionary(files: string[] | null): Promise<string[] | null> {
-  if (files != null) {
-    let dictionary : string[] = [];
-    let wordData
-    for (const file of files){
-      try {
-        wordData = await import(`../../data/${file}`)
-        dictionary = dictionary.concat(wordData.words);
-      } catch (error) {
-        console.error(error);
-      }
+export async function createDictionary(files: string[]): Promise<string[]> {
+  let dictionary : string[] = [];
+  let wordData
+  for (const file of files) {
+    try {
+      wordData = await import(`../../data/${file}`)
+      dictionary = dictionary.concat(wordData.words);
+    } catch (error) {
+      console.error(`Er 25: Problem reading file ${file}: ${error}`);
+      return ["-1"]
     }
-    return dictionary;
   }
-  return null;
+  return dictionary;
 }
 
-export function filterDictionary(dictionary: string[] | null, length: number) : string[] | null {
-  if (dictionary != null) {
-    return dictionary?.filter(word => word.length === length);
-  }
-  return null;
+export function filterWords(directory: string[], length: number) : string[] {
+  return directory?.filter(word => word.length === length);
 }
 
-export function readDirectory(dirPath: string, fileType: string) : Promise<string[]>{
-  return getFiles(dirPath, fileType);
+export function picker(words: string[]) : string {
+  return words[Math.floor(Math.random() * words.length)];
 }
 
-export function filterWords(directory: string[] | null, length: number) : string[] | null {
-   if (directory === null) {
-     return null;
-   } else {
-     return directory?.filter(word => word.length === length);
-   }
-}
-
-export function picker(words: string[] | null) : string | null {
-  if (words != null){
-    return words[Math.floor(Math.random() * words.length)];
-  }
-  else {
-    return null;
-  }
-}
-
-export function createPuzzle(word: string | null) : string | null {
+export function createPuzzle(word: string) : string {
   let temp : string[] = [];
   let wordArray : string[] = [];
+  let random : number = 0;
+  temp = word.split('');
 
-  if (word !== null) {
-    temp = word.split('');
-    let random : number = 0;
-
-    for (let i: number = 0; i < word.length; i++) {
-      random = Math.floor(Math.random() * temp.length);
-      wordArray[i] = temp[random];
-      temp.splice(random, 1);
-    }
-    return wordArray.join('');
+  for (let i: number = 0; i < word.length; i++) {
+    random = Math.floor(Math.random() * temp.length);
+    wordArray[i] = temp[random];
+    temp.splice(random, 1);
   }
 
-  return null
+  return wordArray.join('');
 }
 
 // Uses the recursive function from maker/services.ts to make the whole list of anagrams.
@@ -84,11 +58,7 @@ export function createPuzzle(word: string | null) : string | null {
 
 // We're using the word and mix count to see how many times the recursive function is called and
 // how many words are returned.
-export function mixer(word: string | null) : string[] | null {
-  // Catch word being null, call the whole thing off and return null.
-  if (word === null){
-    return null;
-  }
+export function mixer(word: string ) : string[]  {
 
   let result : string[] = [];
   const targetLetter : string = word[4];
@@ -125,3 +95,5 @@ export function mixer(word: string | null) : string[] | null {
   permute('', word);
   return [...new Set(result)];
 }
+
+
