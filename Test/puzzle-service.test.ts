@@ -7,7 +7,11 @@ let testLength : number = 9;
 let testResult : number = 53402;
 
 // Working variables
-let files : string[] , dictionary : string[] , words : string[] , pickedWord : string, puzzleWord : string, targetLetter : string
+let files : string[] ,
+  dictionary : string[] ,
+  words : string[] ,
+  pickedWord : string,
+  puzzleWord : string;
 
 beforeEach(async () => {
   files = await puzzleServices.getFiles(targetDirectory,targetType);
@@ -15,7 +19,6 @@ beforeEach(async () => {
   words = puzzleServices.filterWords(dictionary, 9);
   pickedWord = puzzleServices.picker(words);
   puzzleWord = puzzleServices.createPuzzle(pickedWord);
-  targetLetter = "-1"
 })
 
 test("Should return the list of files from the target directory", async () => {
@@ -64,14 +67,23 @@ test("Returns a anagram of the picked word to create the puzzle word", async () 
 
 //TODO: DODO
 test("Returns all the words that are correct", async () => {
-  // The Target Letter will be the letter in the middle; ie, the fifth letter
-  if (pickedWord.length < 5) {
-    targetLetter = "-1";
-  } else {
-    targetLetter = pickedWord[4];
-  }
+  console.log(`PickedWord: ${pickedWord}\nPuzzleWord: ${puzzleWord}\nLetter: ${puzzleWord[4]}`);
 
-  //const result : string[] = puzzleServices.mixer(pickedWord)
+  // Get the list of words that are correct
+  const result = puzzleServices.listAnswers(puzzleWord, dictionary);
 
-  expect (targetLetter).not.toEqual("-1");
+  console.log(`Result: ${result.length}\n
+  4: ${result.filter(word => word.length === 4).length}\n
+  5: ${result.filter(word => word.length === 5).length}\n
+  6: ${result.filter(word => word.length === 6).length}\n
+  \n${result.filter(word => word.length === 6)}\n
+  7: ${result.filter(word => word.length === 7).length}\n
+  \n${result.filter(word => word.length === 7)}\n
+  8: ${result.filter(word => word.length === 8).length}\n
+  \n${result.filter(word => word.length === 8)}\n
+  9: ${result.filter(word => word.length === 9).length}\n
+  \n${result.filter(word => word.length === 9)}`);
+
+  // Get the target letter from the picked word
+  expect (result.length).toBeGreaterThan(0);
 });

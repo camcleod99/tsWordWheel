@@ -58,42 +58,40 @@ export function createPuzzle(word: string) : string {
 
 // We're using the word and mix count to see how many times the recursive function is called and
 // how many words are returned.
-export function mixer(word: string ) : string[]  {
-
+export function listAnswers(word: string, dictionary: string[] ) : string[]  {
   let result : string[] = [];
   const targetLetter : string = word[4];
+  const puzzleAsArray : string[] = word.split('');
+  const filteredDictionary : string[] = dictionary.filter(entry => entry.includes(targetLetter))
 
-  function checkIsWord(word : string) : boolean {
-    const vowels : string = "aeiou";
-    for (let i = 0 ; i < word.length ; i++) {
-      for (const vowel of vowels) {
-        if (word[i] === vowel) {
-          return true;
-        }
+  function countLetters(str: string): Record<string, number> {
+    const counts: Record<string, number> = {};
+    for (const letter of str) {
+      if (!counts[letter]) {
+        counts[letter] = 0;
+      }
+      counts[letter]++;
+    }
+    return counts;
+  }
+
+  function canFormWord(word: string, letters: string[]): boolean {
+    const wordCounts = countLetters(word);
+    const letterCounts = countLetters(letters.join(''));
+
+    for (const letter in wordCounts) {
+      if (wordCounts[letter] > (letterCounts[letter] || 0)) {
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
-  function permute(currentWord : string, remainingLetters : string) {
-    if (currentWord.length >= 4 && currentWord.includes(targetLetter) && checkIsWord(currentWord)) {
-      result.push(currentWord);
-    }
-
-    if (remainingLetters.length === 0) {
-      return;
-    }
-
-    for (let i = 0; i < remainingLetters.length; i++) {
-      const nextLetter = remainingLetters[i];
-      const newWord = currentWord + nextLetter;
-      const newRemaining = remainingLetters.slice(0, i) + remainingLetters.slice(i + 1);
-      permute(newWord, newRemaining);
+  for (const entry of filteredDictionary) {
+    if (canFormWord(entry, puzzleAsArray)) {
+      result.push(entry);
     }
   }
 
-  permute('', word);
-  return [...new Set(result)];
-}
-
-
+  return result
+ }
