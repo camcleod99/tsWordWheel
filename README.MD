@@ -9,3 +9,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eros augue, eleme
 ## Running
 
 ## Things of Note
+
+- Word List is used with thanks from [dwrl/english-words](https://github.com/dwyl/english-words)

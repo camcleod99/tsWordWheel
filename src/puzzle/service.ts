@@ -1,19 +1,55 @@
-async function loadWords(fileName: String) : Promise<string[] | null>{
-  try {
-    const wordData = await import(`../../data/${fileName}.json`)
-    return wordData.words;
+// Load the readline module from Node.js
+import * as fs from 'fs';
+import * as util from 'util';
+const readDir = util.promisify(fs.readdir);
+
+ export async function getFiles(dirPath: string, fileType: string): Promise<string[]>{
+  let listing : string[] = [];
+  try{
+    listing = await readDir(dirPath);
+  } catch (error) {
+    console.error(`Er 11: Problem reading directory: ${error}`);
+    return ["-1"];
   }
-  catch (error) {
-    console.error(error);
-    return null;
-  }
+  return listing.filter(file => file.endsWith(`.${fileType}`));
 }
-export function maker(fileName: string) : Promise<string[] | null> {
-  return loadWords(fileName);
+
+export async function createDictionary(files: string[]): Promise<string[]> {
+  let dictionary : string[] = [];
+  let wordData
+  for (const file of files) {
+    try {
+      wordData = await import(`../../data/${file}`)
+      dictionary = dictionary.concat(wordData.words);
+    } catch (error) {
+      console.error(`Er 25: Problem reading file ${file}: ${error}`);
+      return ["-1"]
+    }
+  }
+  return dictionary;
+}
+
+export function filterWords(directory: string[], length: number) : string[] {
+  return directory?.filter(word => word.length === length);
 }
 
 export function picker(words: string[]) : string {
   return words[Math.floor(Math.random() * words.length)];
+}
+
+export function createPuzzle(word: string) : string {
+  let temp : string[] ;
+  let wordArray : string[] = [];
+  let random : number = 0;
+  temp = word.split('');
+
+  for (let i: number = 0; i < word.length; i++) {
+    random = Math.floor(Math.random() * temp.length);
+    wordArray[i] = temp[random];
+    temp.splice(random, 1);
+  }
+
+  return wordArray.join('');
 }
 
 // Uses the recursive function from maker/services.ts to make the whole list of anagrams.
@@ -22,39 +58,40 @@ export function picker(words: string[]) : string {
 
 // We're using the word and mix count to see how many times the recursive function is called and
 // how many words are returned.
-export function mixer(word: string) : string[] {
+export function listAnswers(word: string, dictionary: string[] ) : string[]  {
   let result : string[] = [];
   const targetLetter : string = word[4];
+  const puzzleAsArray : string[] = word.split('');
+  const filteredDictionary : string[] = dictionary.filter(entry => entry.includes(targetLetter))
 
-  function checkIsWord(word : string) : boolean {
-    const vowels : string = "aeiou";
-    for (let i = 0 ; i < word.length ; i++) {
-      for (const vowel of vowels) {
-        if (word[i] === vowel) {
-          return true;
-        }
+  function countLetters(str: string): Record<string, number> {
+    const counts: Record<string, number> = {};
+    for (const letter of str) {
+      if (!counts[letter]) {
+        counts[letter] = 0;
+      }
+      counts[letter]++;
+    }
+    return counts;
+  }
+
+  function canFormWord(word: string, letters: string[]): boolean {
+    const wordCounts = countLetters(word);
+    const letterCounts = countLetters(letters.join(''));
+
+    for (const letter in wordCounts) {
+      if (wordCounts[letter] > (letterCounts[letter] || 0)) {
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
-  function permute(currentWord : string, remainingLetters : string) {
-    if (currentWord.length >= 4 && currentWord.includes(targetLetter) && checkIsWord(currentWord)) {
-      result.push(currentWord);
-    }
-
-    if (remainingLetters.length === 0) {
-      return;
-    }
-
-    for (let i = 0; i < remainingLetters.length; i++) {
-      const nextLetter = remainingLetters[i];
-      const newWord = currentWord + nextLetter;
-      const newRemaining = remainingLetters.slice(0, i) + remainingLetters.slice(i + 1);
-      permute(newWord, newRemaining);
+  for (const entry of filteredDictionary) {
+    if (canFormWord(entry, puzzleAsArray)) {
+      result.push(entry);
     }
   }
 
-  permute('', word);
-  return [...new Set(result)];
-}
+  return result
+ }
