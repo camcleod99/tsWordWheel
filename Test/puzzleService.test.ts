@@ -1,4 +1,4 @@
-import * as puzzleServices from '../src/puzzle/service';
+import * as puzzleServices from '../src/puzzleService';
 
 // Test Variables
 let targetDirectory : string = './data/';
@@ -36,7 +36,7 @@ test("Filters the directory by word length", async () => {
   expect (puzzleServices.filterWords(dictionary, testLength)?.length).toEqual(testResult);
 });
 
-test("Picks a random word from the words that are of length 9 for the puzzle word", async () => {
+test("Picks a random word from the words that are of length 9 for the - word", async () => {
   // Pre-define the result variable and let a process variable take the value of the function
   let result : string = "-1";
   let process = puzzleServices.picker(words)
@@ -52,7 +52,7 @@ test("Picks a random word from the words that are of length 9 for the puzzle wor
   expect (result.length).toEqual(testLength);
 });
 
-test("Returns a anagram of the picked word to create the puzzle word", async () => {
+test("Returns a anagram of the picked word to create the - word", async () => {
   let result = "-1";
   let process = puzzleServices.createPuzzle(pickedWord)
 

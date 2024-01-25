@@ -20,8 +20,24 @@ A word that can be used in the game
 
 ## Milestones
 
-### 0.0.2 - WW2 Legal - TODO
-#### Description
+##  0.0.5 - Code Refactoring
+TODO: EXPLAIN
+
+##  0.0.4 - WW Express Refactoring - TODO
+Webpage looks good
+
+1. CSS Style of Website
+
+##  0.0.3 - WW Express - TODO
+Loads a web page that displays the word wheel. 
+
+The frontend waits for the word-wheel to generate the codeword and then displays the puzzle as a word wheel.
+
+1. *DONE* - Use puzzleService to generate a puzzle
+2. *TODO* - Install Express to access the service and get the puzzle
+3. *TODO* - Basic Website that displays the puzzle
+
+### 0.0.2 - WW2 Legal - DONE
 Continuing from 0.0.1. 
 
 The maker service will now find the legal words from the created list of words.
@@ -34,12 +50,14 @@ Whilst the API is the best method, it might not be the most practical, so at thi
 be used.
 
 #### Tests
-1. **TODO** - Directories are loaded
-2. **TODO** - Wordlist is checked against directories
-3. **TODO** - Legal words are returned
+1. **DONE** - Directories are loaded
+2. **DONE** - Wordlist is checked against directories
+3. **DONE** - Legal words are returned
  
 #### Notes
-- lopsom
+- There was some internal consternation about how quickly the programme worked in terms of finding correct words until I 
+realise that it was faster to filter the list of correct words based on the word lists
+- Trying really hard to hold back my want to refactor this code right now otherwise I will not be able to get going.
 
 ### 0.0.1 - WW1 Functional - DONE
 #### Description
