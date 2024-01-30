@@ -33,8 +33,12 @@ export function filterWords(directory: string[], length: number) : string[] {
   return directory?.filter(word => word.length === length);
 }
 
-export function picker(words: string[]) : string {
-  return words[Math.floor(Math.random() * words.length)];
+export function picker(words: string[]) : string | null {
+   if (words.length === 0) {
+    return null;
+   } else {
+     return words[Math.floor(Math.random() * words.length)];
+   }
 }
 
 export function createPuzzle(word: string) : string {

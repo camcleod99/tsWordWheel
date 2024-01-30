@@ -1,7 +1,5 @@
 .DS_Store
 node_modules
 bin
-./idea
-/Test/puzzleService.test.js
-/src/puzzleService.js
-/app.js
+dist
+.idea

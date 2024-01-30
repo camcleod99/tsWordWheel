@@ -1,4 +1,4 @@
-const puzzleServices = require('../src/puzzleService');
+const puzzleServices = require('../src/puzzleService.ts');
 
 // Test Variables
 let targetDirectory : string = './data/';
@@ -23,7 +23,7 @@ beforeEach(async () => {
 
 test("Should return the list of files from the target directory", async () => {
   const expectedResult : string[] = ["words_nine.json", "words_eight.json", "words_seven.json", "words_six.json", "words_five.json", "words_four.json"]
-  // console.log(`Files   : ${files}\nExpected: ${expectedResult}`)
+  console.log(`Files   : ${files}\nExpected: ${expectedResult}`)
   expect(files[0]).not.toEqual("-1");
   expect(files).toEqual(expect.arrayContaining(expectedResult));
 });
@@ -85,4 +85,43 @@ test("Returns all the words that are correct", async () => {
 
   // Get the target letter from the picked word
   expect (result.length).toBeGreaterThan(0);
+});
+
+// Suggested Tests
+
+test("Should return an error when directory does not exist", async () => {
+  const invalidDirectory = './invalid_directory/';
+  const files = await puzzleServices.getFiles(invalidDirectory, targetType);
+  expect(files[0]).toEqual("-1");
+});
+
+test("Should return an error when file does not exist", async () => {
+  const invalidFiles = ['invalid_file.json'];
+  const dictionary = await puzzleServices.createDictionary(invalidFiles);
+  expect(dictionary[0]).toEqual("-1");
+});
+
+test("Should return an empty array when no words of specified length exist", () => {
+  const shortWords = ['a', 'ab', 'abc'];
+  const result = puzzleServices.filterWords(shortWords, testLength);
+  expect(result).toEqual([]);
+});
+
+test("Should return null when no words are available for picking", () => {
+  const emptyWords: never[] = [];
+  const result = puzzleServices.picker(emptyWords);
+  expect(result).toBeNull();
+});
+
+test("Should return the same word when word length is 1", () => {
+  const oneLetterWord = 'a';
+  const result = puzzleServices.createPuzzle(oneLetterWord);
+  expect(result).toEqual(oneLetterWord);
+});
+
+test("Should return an empty array when no words can be formed from the puzzle", () => {
+  const dictionary = ['abcd', 'efgh', 'ijkl'];
+  const puzzleWord = 'mnop';
+  const result = puzzleServices.listAnswers(puzzleWord, dictionary);
+  expect(result).toEqual([]);
 });
