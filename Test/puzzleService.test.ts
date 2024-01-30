@@ -1,4 +1,4 @@
-import * as puzzleServices from '../src/puzzleService';
+const puzzleServices = require('../src/puzzleService');
 
 // Test Variables
 let targetDirectory : string = './data/';
@@ -65,7 +65,6 @@ test("Returns a anagram of the picked word to create the - word", async () => {
   expect (result).not.toEqual(pickedWord);
 });
 
-//TODO: DODO
 test("Returns all the words that are correct", async () => {
   console.log(`PickedWord: ${pickedWord}\nPuzzleWord: ${puzzleWord}\nLetter: ${puzzleWord[4]}`);
 
@@ -73,16 +72,16 @@ test("Returns all the words that are correct", async () => {
   const result = puzzleServices.listAnswers(puzzleWord, dictionary);
 
   console.log(`Result: ${result.length}\n
-  4: ${result.filter(word => word.length === 4).length}\n
-  5: ${result.filter(word => word.length === 5).length}\n
-  6: ${result.filter(word => word.length === 6).length}\n
-  \n${result.filter(word => word.length === 6)}\n
-  7: ${result.filter(word => word.length === 7).length}\n
-  \n${result.filter(word => word.length === 7)}\n
-  8: ${result.filter(word => word.length === 8).length}\n
-  \n${result.filter(word => word.length === 8)}\n
-  9: ${result.filter(word => word.length === 9).length}\n
-  \n${result.filter(word => word.length === 9)}`);
+  4: ${result.filter((word: string | any[]) => word.length === 4).length}\n
+  5: ${result.filter((word: string | any[]) => word.length === 5).length}\n
+  6: ${result.filter((word: string | any[]) => word.length === 6).length}\n
+  \n${result.filter((word: string | any[]) => word.length === 6)}\n
+  7: ${result.filter((word: string | any[]) => word.length === 7).length}\n
+  \n${result.filter((word: string | any[]) => word.length === 7)}\n
+  8: ${result.filter((word: string | any[]) => word.length === 8).length}\n
+  \n${result.filter((word: string | any[]) => word.length === 8)}\n
+  9: ${result.filter((word: string | any[]) => word.length === 9).length}\n
+  \n${result.filter((word: string | any[]) => word.length === 9)}`);
 
   // Get the target letter from the picked word
   expect (result.length).toBeGreaterThan(0);
