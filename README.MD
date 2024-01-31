@@ -1,3 +1,5 @@
+![CI](https://github.com/camcleod99/camwordwheel/actions/workflows/ci.yml/badge.svg)
+
 # CamCodeWheel 
 # Milestone 2 : 24-01-25
 
@@ -26,7 +28,7 @@ CLI
 
 ## Running
 
-As of Milestone 2, the app is still in the alpha phase, therefore, the programme runes entirely via the Jest Test Suite
+As of Milestone 2, the app is still in the alpha phase, therefore, the program runes entirely via the Jest Test Suite
 Therefore, at root, run the following command;
 
 ```

@@ -1,0 +1,35 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Create check run
+        uses: octokit/request-action@v1.x
+        with:
+          route: POST /repos/${{ github.repository }}/check-runs
+          mediaType: '{"previews": ["antiope"]}'
+          name: Test Results
+          head_sha: ${{ github.sha }}
+          status: completed
+          conclusion: success
+          output: '{"title":"All tests passed","summary":"All Jest tests passed successfully."}'
+          actions: '[{"label":"All tests passed","description":"All tests passed successfully.","identifier":"all_tests_passed"}]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

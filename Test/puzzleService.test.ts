@@ -1,7 +1,9 @@
+// NOTE: This file is not to be complied.
+// Please ignore any project errors considering this file.
 const puzzleServices = require('../src/puzzleService.ts');
 
 // Test Variables
-let targetDirectory : string = './data/';
+let targetDirectory : string = './src/data/';
 let targetType : string = 'json';
 let testLength : number = 9;
 let testResult : number = 53402;
@@ -41,7 +43,7 @@ test("Picks a random word from the words that are of length 9 for the - word", a
   let result : string = "-1";
   let process = puzzleServices.picker(words)
 
-  // This will make the expect keyword can play nicely with the error handling
+  // This will make the expected keyword can play nicely with the error handling
   if (process != null) {
     result = process;
   }

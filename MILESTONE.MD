@@ -55,7 +55,7 @@ be used.
 3. **DONE** - Legal words are returned
  
 #### Notes
-- There was some internal consternation about how quickly the programme worked in terms of finding correct words until I 
+- There was some internal consternation about how quickly the program worked in terms of finding correct words until I 
 realise that it was faster to filter the list of correct words based on the word lists
 - Trying really hard to hold back my want to refactor this code right now otherwise I will not be able to get going.
 
@@ -64,14 +64,14 @@ realise that it was faster to filter the list of correct words based on the word
 The Maker service Creates a nine-letter word and notes the forth letter as the "target" letter. The word it creates is 
 not legal (Has a point value in Scrabble).
 
-From this word, a list of words that contain a combination of letters and the terget letter is produced and output 
+From this word, a list of words that contain a combination of letters and the target letter is produced and output 
 to a JSON file. 
 
 It has to be emphasized that these words are, again, not legal.
 
 #### Tests 
 1. **DONE** - Creates a Key Word of nine letters
-2. **DONE** - returns the 5th letter as the "Target Letter"
+2. **DONE** - returns the fifth letter as the "Target Letter"
 3. **DONE** - Creates a list of words from the result of above
 4. **DONE** - Each Word in the list has the "Target Letter"
 5. **DONE** - The List of words has at least three other letters in the Code Word

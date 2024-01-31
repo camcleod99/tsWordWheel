@@ -1,8 +1,18 @@
 // Load the readline module from Node.js
-const fs = require('fs');
-const util = require('util');
+import fs from "fs";
+import util from "util";
+
+//const fs = require('fs');
+//const util = require('util');
 const readDir = util.promisify(fs.readdir);
 
+/**
+ * Get the list of files from the target directory.
+ * This confirms that the directory exists and the files are available.
+ * @param dirPath - Path of the directory to read
+ * @param fileType - filetype to filter based on
+ * @returns String[] - List of files in the directory
+ */
  export async function getFiles(dirPath: string, fileType: string): Promise<string[]>{
   let listing : string[] = [];
   try{
@@ -19,8 +29,8 @@ export async function createDictionary(files: string[]): Promise<string[]> {
   let wordData
   for (const file of files) {
     try {
-      wordData = await import(`../data/${file}`)
-      dictionary = dictionary.concat(wordData.words);
+      wordData = await import(`./data/${file}`)
+      dictionary = dictionary.concat(wordData["words"]);
     } catch (error) {
       console.error(`Er 25: Problem reading file ${file}: ${error}`);
       return ["-1"]
