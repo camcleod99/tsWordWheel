@@ -1,4 +1,4 @@
-[![CI](https://github.com/camcleod99/CamWordWheel/actions/workflows/ci.yml/badge.svg)](https://github.com/camcleod99/CamWordWheel/actions/workflows/ci.yml)
+[![Jest Testing](https://github.com/camcleod99/CamWordWheel/actions/workflows/ci.yml/badge.svg)](https://github.com/camcleod99/CamWordWheel/actions/workflows/ci.yml)
 
 # CamCodeWheel 
 # Milestone 2 : 24-01-25
