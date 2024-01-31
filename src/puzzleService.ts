@@ -1,9 +1,6 @@
 // Load the readline module from Node.js
 import fs from "fs";
 import util from "util";
-
-//const fs = require('fs');
-//const util = require('util');
 const readDir = util.promisify(fs.readdir);
 
 /**
@@ -24,6 +21,14 @@ const readDir = util.promisify(fs.readdir);
   return listing.filter(file => file.endsWith(`.${fileType}`));
 }
 
+/**
+ * Create a dictionary from the list of files.
+ * Adds the contents of the Word array in each JSON file to the dictionary.
+ * Returns an array with ["-1"] if there is an error for later error handling.
+ * @param files - List of files to read
+ * @returns String[] - List of words from the files
+ * @throws Error - If there is an error reading the file
+ */
 export async function createDictionary(files: string[]): Promise<string[]> {
   let dictionary : string[] = [];
   let wordData
