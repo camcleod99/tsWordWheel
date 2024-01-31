@@ -32,4 +32,4 @@ jobs:
           output: '{"title":"All tests passed","summary":"All Jest tests passed successfully."}'
           actions: '[{"label":"All tests passed","description":"All tests passed successfully.","identifier":"all_tests_passed"}]'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
