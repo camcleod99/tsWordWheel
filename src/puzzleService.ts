@@ -19,7 +19,7 @@ const readDir = util.promisify(fs.readdir);
     listing = await readDir(dirPath);
   } catch (error) {
     console.error(`Er 11: Problem reading directory: ${error}`);
-    return ["-1"];
+    return ["-2"];
   }
   return listing.filter(file => file.endsWith(`.${fileType}`));
 }
