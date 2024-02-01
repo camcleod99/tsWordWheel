@@ -1,5 +1,4 @@
-// NOTE: This file is not to be complied.
-// Please ignore any project errors considering this file.
+// NOTE: This file is not to be complied. // Please ignore any project errors considering this file.
 const puzzleServices = require('../src/puzzleService.ts');
 
 // Test Variables

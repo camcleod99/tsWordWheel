@@ -56,7 +56,11 @@ export function picker(words: string[]) : string | null {
    }
 }
 
-export function createPuzzle(word: string) : string {
+export function createPuzzle(word: string | null) : string | null {
+  if (word === null) {
+    return null;
+  }
+
   let temp : string[] ;
   let wordArray : string[] = [];
   let random : number = 0;

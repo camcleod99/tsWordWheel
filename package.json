@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start" : "node dist/app.js",
+    "start": "node dist/app.js",
     "dev": "ts-node src/app.ts",
     "test": "jest --testPathPatern=src/Test",
     "teWatch": "jest --watch --testPathPatern=src/Test",
@@ -18,12 +18,14 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^29.5.11",
-    "ts-jest": "^29.1.1",
-    "jest": "^29.7.0"
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1"
   },
   "dependencies": {
     "@types/express": "^4.17.21",
     "express": "^4.18.2",
+    "supertest": "^6.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }

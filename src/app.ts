@@ -1,12 +1,31 @@
-const express = require('express');
+import express, { Request, Response } from 'express';
+import * as service from '../src/puzzleService';
 
-const app = express();
-const port = 3000;
+const site = express();
+const sitePort = 3000;
 
-app.get('/', (req: any, res: { send: (arg0: string) => void; }) => {
-  res.send('Hello World!');
+const api = express();
+const apiPort = 4000;
+
+// Entry Point for the website
+site.get('/', (req: Request, res: Response) => {
+  res.send('Hello World! This was sent via the website');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+// Entry Point for the API
+api.get('/', (req: Request, res: Response) => {
+  res.send('Hello World! This was sent via the API');
+});
+
+// TODO: API ENDPOINT, get a puzzle word from the service
+
+// TODO: API ENDPOINT, get possible answers from the service
+
+// Listen Points
+site.listen(sitePort, () => {
+  console.log(`Website is running at http://localhost:${sitePort}`);
+});
+
+api.listen(apiPort, () => {
+  console.log(`API is running at http://localhost:${apiPort}`);
 });
