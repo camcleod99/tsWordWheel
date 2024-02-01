@@ -7,7 +7,7 @@ The nine-letter word that is the basis of the puzzle
 
 **"Target Letter"**
     
-The fifth (middle) letter in the Keyword. It's the letter all words in the solutation have to have.
+The fifth (middle) letter in the Keyword. It's the letter all words in the solution have to have.
 
 **"Legal"**
 
@@ -37,7 +37,7 @@ The frontend waits for the word-wheel to generate the codeword and then displays
 2. *TODO* - Install Express to access the service and get the puzzle
 3. *TODO* - Basic Website that displays the puzzle
 
-### 0.0.2 - WW2 Legal - DONE
+### 0.0.2—WW2 Legal - DONE
 Continuing from 0.0.1. 
 
 The maker service will now find the legal words from the created list of words.
@@ -55,11 +55,11 @@ be used.
 3. **DONE** - Legal words are returned
  
 #### Notes
-- There was some internal consternation about how quickly the program worked in terms of finding correct words until I 
-realise that it was faster to filter the list of correct words based on the word lists
+- There was some internal consternation about how quickly the program worked in terms of finding the correct words. 
+Then I realized that it was faster to filter the list of correct words based on the word lists
 - Trying really hard to hold back my want to refactor this code right now otherwise I will not be able to get going.
 
-### 0.0.1 - WW1 Functional - DONE
+### 0.0.1—WW1 Functional - DONE
 #### Description
 The Maker service Creates a nine-letter word and notes the forth letter as the "target" letter. The word it creates is 
 not legal (Has a point value in Scrabble).
