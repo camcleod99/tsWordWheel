@@ -1,0 +1,125 @@
+#wordwheel-container {
+  display: flex;
+  justify-content: center;
+  /*align-items: center;*/
+  height: 50vh;
+}
+
+#wordwheel {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+#lines{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  left: 49%;
+  width: 1%;
+  height: 100%;
+  background: #000;
+}
+
+.line:nth-of-type(1) {
+  transform: rotate(45deg);
+}
+
+.line:nth-of-type(2) {
+  transform: rotate(90deg);
+}
+
+.line:nth-of-type(3) {
+  transform: rotate(135deg);
+}
+
+.line:nth-of-type(4) {
+  transform: rotate(180deg);
+}
+
+#letters {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter {
+  position: absolute;
+  margin: 10px;
+  transform-origin: 50% 50%;
+  font-size: 2.5rem;
+}
+
+.letter:nth-of-type(1) {
+  transform: rotate(20deg) translate(100px) rotate(-20deg);
+}
+
+.letter:nth-of-type(2) {
+  transform: rotate(65deg) translate(100px) rotate(-65deg);
+}
+
+.letter:nth-of-type(3) {
+  transform: rotate(110deg) translate(100px) rotate(-110deg);
+}
+
+.letter:nth-of-type(4) {
+  transform: rotate(155deg) translate(100px) rotate(-155deg);
+}
+
+.letter:nth-of-type(5) {
+  transform: rotate(200deg) translate(100px) rotate(-200deg);
+}
+
+.letter:nth-of-type(6) {
+  transform: rotate(245deg) translate(100px) rotate(-245deg);
+}
+
+.letter:nth-of-type(7) {
+  transform: rotate(290deg) translate(100px) rotate(-290deg);
+}
+
+.letter:nth-of-type(8) {
+  transform: rotate(335deg) translate(100px) rotate(-335deg);
+}
+
+#target {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#target-letter {
+  font-size: 3rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
