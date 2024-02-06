@@ -12,6 +12,7 @@
     "test": "jest --testPathPatern=src/Test",
     "teWatch": "jest --watch --testPathPatern=src/Test",
     "build": "tsc",
+    "buildHTML": "tsc --outDir ./public/script ./script/script.ts && cp -R ./public ./dist",
     "buWatch": "tsc -w"
   },
   "author": "Craig A. McLeod",

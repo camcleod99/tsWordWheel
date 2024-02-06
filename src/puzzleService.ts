@@ -118,3 +118,21 @@ export function listAnswers(word: string, dictionary: string[] ) : string[]  {
 
   return result
  }
+
+ /** Create Puzzle
+  * @ returns JSON object with the puzzle word, the anagram of the puzzle word and a list of possible answers
+  */
+
+  // export function createPuzzleWord():  {puzzleWord: string, anagram: string | null, answers: string[]}  {
+  //   const files = getFiles("./data", "json");
+  //   const dictionary = createDictionary(files);
+  //   const words = filterWords(dictionary, 9);
+  //   const pickedWord = picker(words);
+  //   const puzzleWord = createPuzzle(pickedWord);
+  //   if (puzzleWord === null) {
+  //     throw new Error("Puzzle word is null");
+  //     return { puzzleWord: "-1", anagram: "-1", answers: ["-1"]};
+  //   }
+  //   const answers = listAnswers(puzzleWord, dictionary);
+  //   return {puzzleWord, anagram: pickedWord, answers};
+  // }

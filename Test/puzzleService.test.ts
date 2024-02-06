@@ -126,3 +126,10 @@ test("Should return an empty array when no words can be formed from the puzzle",
   const result = puzzleServices.listAnswers(puzzleWord, dictionary);
   expect(result).toEqual([]);
 });
+
+// test("Should return a json object with the selected word, the puzzle word and a list of answers", () => {
+//   // Call the function - It should use the functions above to create the json object which it will return
+//   // Get the Json object
+//   // Check the object has the correct keys
+//   // Check the values validate
+// });
