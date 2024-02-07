@@ -8,40 +8,94 @@
   <title>Wordwheel</title>
 </head>
 <body>
-  <header>
-    <h1>Wordwheel</h1>
-  </header>
-  <main>
-    <div id="wordwheel-container">
-      <div id="wordwheel">
-        <div id="lines">
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
+<header>
+  <h1>Word Wheel</h1>
+</header>
+
+<main>
+  <section id="wordwheel">
+    <section id="wordwheel-puzzle">
+      <div id="wordwheel-puzzle-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div id="wordwheel-puzzle-target">
+        <span>Z</span>
+      </div>
+
+      <div id="wordwheel-puzzle-letters">
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+        <span>F</span>
+        <span>G</span>
+        <span>H</span>
+      </div>
+    </section>
+  </section>
+
+  <section id="controls">
+    <button id="controls-start">Start Game</button>
+    <button id="controls-word">Show Answer Word</button>
+    <button id="controls-list">Show Answer List</button>
+  </section>
+
+  <section id="Answer">
+    <section id="answer-word">
+      <h2>The Answer is:</h2>
+      <p id="Answer-Word-Text">Lorem ipsum</p>
+    </section>
+
+    <section id="answer-list">
+      <h2>Words</h2>
+
+      <section class="answer-list-row">
+        <div id="Answer-List-Eight" class="Answer-List-Words">
+          <h3>8 Letters</h3>
+          <ul>
+            <li>Lorem</li>
+          </ul>
         </div>
-        <div id="target">
-          <span id="target-letter">Z</span>
+        <div id="Answer-List-Seven" class="Answer-List-Words">
+          <h3>7 Letters</h3>
+          <ul>
+            <li>Lorem</li>
+          </ul>
         </div>
-        <div id="letters">
-          <span class="letter">A</span>
-          <span class="letter">B</span>
-          <span class="letter">C</span>
-          <span class="letter">D</span>
-          <span class="letter">E</span>
-          <span class="letter">F</span>
-          <span class="letter">G</span>
-          <span class="letter">H</span>
+        <div id="Answer-List-Six" class="Answer-List-Words">
+          <h3>6 Letters</h3>
+          <ul>
+            <li>Lorem</li>
+          </ul>
         </div>
+      </section>
+
+      <section class="answer-list-row">
+        <div id="Answer-List-Five" class="Answer-List-Words">
+          <h3>5 Letters</h3>
+          <ul>
+            <li>Lorem</li>
+          </ul>
         </div>
-    </div>
-    <div id="controls">
-      <button id="start-game">Start Game</button>
-    </div>
-  </main>
-  <footer>
-    <p>Wordwheel by <a href="">Craig McLeod</a>. <a href="">GitHub Profile</a></p>
-  </footer>
+        <div id="Answer-List-Four" class="Answer-List-Words">
+          <h3>4 Letters</h3>
+          <ul>
+            <li>Lorem</li>
+          </ul>
+        </div>
+      </section>
+    </section>
+  </section>
+</main>
+
+<footer>
+  <p>Wordwheel by <a href="">Craig McLeod</a>. <a href="">GitHub Profile</a></p>
+</footer>
 <script src="./script/script.js"></script>
 </body>
 </html>

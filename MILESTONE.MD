@@ -20,22 +20,25 @@ A word that can be used in the game
 
 ## Milestones
 
-##  0.0.5 - Code Refactoring
-TODO: EXPLAIN
+##  0.0.5 - WEBSITE APP CREATION - TODO
+The website is made interactive. It loads the puzzle and allows the user to check their 
+answers.
 
-##  0.0.4 - WW Express Refactoring - TODO
-Webpage looks good
-
-1. CSS Style of Website
+- [ ] The website is made interactive
+- [ ] The website loads the puzzle
+- [ ] The website allows the user to check their answers
+- [ ] The website displays the answers
 
 ##  0.0.3 - WW Express - TODO
 Loads a web page that displays the word wheel. 
 
 The frontend waits for the word-wheel to generate the codeword and then displays the puzzle as a word wheel.
 
-1. *DONE* - Use puzzleService to generate a puzzle
-2. *TODO* - Install Express to access the service and get the puzzle
-3. *TODO* - Basic Website that displays the puzzle
+- [x] Use puzzleService to generate a puzzle
+- [x] Install Express to access the service and get the puzzle
+- [x] Make Basic Website that displays the puzzle
+- [ ] Express Servers the Website
+- [ ] Express Serves the API
 
 ### 0.0.2—WW2 Legal - DONE
 Continuing from 0.0.1. 
@@ -50,9 +53,9 @@ Whilst the API is the best method, it might not be the most practical, so at thi
 be used.
 
 #### Tests
-1. **DONE** - Directories are loaded
-2. **DONE** - Wordlist is checked against directories
-3. **DONE** - Legal words are returned
+- [x] Directories are loaded
+- [x] Wordlist is checked against directories
+- [x] Legal words are returned
  
 #### Notes
 - There was some internal consternation about how quickly the program worked in terms of finding the correct words. 
@@ -70,12 +73,12 @@ to a JSON file.
 It has to be emphasized that these words are, again, not legal.
 
 #### Tests 
-1. **DONE** - Creates a Key Word of nine letters
-2. **DONE** - returns the fifth letter as the "Target Letter"
-3. **DONE** - Creates a list of words from the result of above
-4. **DONE** - Each Word in the list has the "Target Letter"
-5. **DONE** - The List of words has at least three other letters in the Code Word
-6. **DONE** - The list can be outputted into a json file
+- [x] Creates a Key Word of nine letters
+- [x] returns the fifth letter as the "Target Letter"
+- [x] Creates a list of words from the result of above
+- [x] Each Word in the list has the "Target Letter"
+- [x] The List of words has at least three other letters in the Code Word
+- [x] The list can be outputted into a json file
 
 #### Notes
 - This was the first attempt at this milestone.  
