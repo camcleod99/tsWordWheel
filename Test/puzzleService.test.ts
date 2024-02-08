@@ -127,9 +127,13 @@ test("Should return an empty array when no words can be formed from the puzzle",
   expect(result).toEqual([]);
 });
 
-// test("Should return a json object with the selected word, the puzzle word and a list of answers", () => {
-//   // Call the function - It should use the functions above to create the json object which it will return
-//   // Get the Json object
-//   // Check the object has the correct keys
-//   // Check the values validate
-// });
+/** Working **/
+
+test("Should return a json object with the selected word, the puzzle word and a list of answers", async () => {
+  const result = await (puzzleServices.createPuzzleWord());
+  expect(result).toEqual(expect.objectContaining({
+    puzzleWord: expect.any(String),
+    anagram: expect.any(String),
+    answers: expect.any(Array)
+  }));
+});

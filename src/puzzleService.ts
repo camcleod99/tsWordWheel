@@ -44,10 +44,19 @@ export async function createDictionary(files: string[]): Promise<string[]> {
   return dictionary;
 }
 
+/**
+ * Filter the words in the directory based on the length of the word.
+ * @param directory
+ * @param length
+ */
 export function filterWords(directory: string[], length: number) : string[] {
   return directory?.filter(word => word.length === length);
 }
 
+/**
+ * Randomly pick a word from the list of words.
+ * @param words
+ */
 export function picker(words: string[]) : string | null {
    if (words.length === 0) {
     return null;
@@ -56,6 +65,10 @@ export function picker(words: string[]) : string | null {
    }
 }
 
+/**
+ * Create a puzzle from the word.
+ * @param word
+ */
 export function createPuzzle(word: string | null) : string | null {
   if (word === null) {
     return null;
@@ -75,12 +88,17 @@ export function createPuzzle(word: string | null) : string | null {
   return wordArray.join('');
 }
 
-// Uses the recursive function from maker/services.ts to make the whole list of anagrams.
-// We can also force "word-fullness", i.e.: It's a word if it has at least one vowel
-// by not passing in words into the final result if it fails the "Is a word" test
-
-// We're using the word and mix count to see how many times the recursive function is called and
-// how many words are returned.
+/**
+ * List the possible answers for the puzzle word.
+ * Uses the recursive function from maker/services.ts to make the whole list of anagrams.
+ * We can also force "word-fullness", i.e.: It's a word if it has at least one vowel
+ * by not passing in words into the final result if it fails the "Is a word" test
+ *
+ * We're using the word and mix count to see how many times the recursive function is called and
+ * how many words are returned.
+ * @param word
+ * @param dictionary
+ */
 export function listAnswers(word: string, dictionary: string[] ) : string[]  {
   let result : string[] = [];
   const targetLetter : string = word[4];
@@ -123,16 +141,17 @@ export function listAnswers(word: string, dictionary: string[] ) : string[]  {
   * @ returns JSON object with the puzzle word, the anagram of the puzzle word and a list of possible answers
   */
 
-  // export function createPuzzleWord():  {puzzleWord: string, anagram: string | null, answers: string[]}  {
-  //   const files = getFiles("./data", "json");
-  //   const dictionary = createDictionary(files);
-  //   const words = filterWords(dictionary, 9);
-  //   const pickedWord = picker(words);
-  //   const puzzleWord = createPuzzle(pickedWord);
-  //   if (puzzleWord === null) {
-  //     throw new Error("Puzzle word is null");
-  //     return { puzzleWord: "-1", anagram: "-1", answers: ["-1"]};
-  //   }
-  //   const answers = listAnswers(puzzleWord, dictionary);
-  //   return {puzzleWord, anagram: pickedWord, answers};
-  // }
+ /** Working On **/
+
+ export async function createPuzzleWord(): Promise<{ puzzleWord: string, anagram: string | null, answers: string[] }> {
+   const files = getFiles("./src/data", "json");
+   const dictionary = createDictionary(await files);
+   const words = filterWords(await dictionary, 9);
+   const pickedWord = picker(words);
+   const puzzleWord = createPuzzle(pickedWord);
+   if (puzzleWord === null) {
+     throw new Error("Puzzle word is null");
+   }
+   const answers = listAnswers(puzzleWord, await dictionary);
+   return {puzzleWord, anagram: pickedWord, answers};
+ }
