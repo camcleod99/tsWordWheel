@@ -1,25 +1,47 @@
 // Select the button
-const startGameButton = document.getElementById('start-game') as HTMLButtonElement;
+const elementButtonStart = document.getElementById('controls-start') as HTMLButtonElement;
+const elementButtonAnswer = document.getElementById('controls-word') as HTMLButtonElement;
+const elementButtonList = document.getElementById('controls-list') as HTMLButtonElement;
 
 // Add event listener
-startGameButton.addEventListener('click', function() {
-  // URL of the API
-  const url = 'https://api.example.com/data';
+elementButtonStart.addEventListener('click', function() {
+  const url = 'https://jsonplaceholder.typicode.com/posts/1';
 
-  // Fetch data from the API
+// Fetch data from the API
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      // Get the letters from the data
-      const letters = data.letters;
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle the error
+      console.error('Error:', error);
+    });
+});
 
-      // Get the letter elements
-      const letterElements = document.querySelectorAll('.letter');
+elementButtonAnswer.addEventListener('click', function() {
+  const url = 'https://jsonplaceholder.typicode.com/posts/2';
 
-      // Update the letters in the wordwheel
-      for (let i = 0; i < letters.length; i++) {
-        letterElements[i].textContent = letters[i];
-      }
+// Fetch data from the API
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle the error
+      console.error('Error:', error);
+    });
+});
+
+elementButtonList.addEventListener('click', function() {
+  const url = 'https://jsonplaceholder.typicode.com/posts/3';
+
+// Fetch data from the API
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
     })
     .catch(error => {
       // Handle the error
